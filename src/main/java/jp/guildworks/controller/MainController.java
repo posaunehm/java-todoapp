@@ -1,6 +1,7 @@
 package jp.guildworks.controller;
 
 import jp.guildworks.entity.Todo;
+import jp.guildworks.repository.TodoRepository;
 import jp.guildworks.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +33,15 @@ public class MainController {
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     String newTodo(@RequestParam("newTodo") String newTodo) {
         Todo todo = new Todo(newTodo);
+        todoService.save(todo);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    String editTodo(@RequestParam("id") Integer id, @RequestParam(value = "isDone", required = false) Boolean isDone) {
+        Todo todo = todoService.find(Long.valueOf(id));
+        todo.setIsDone(isDone == null ? false : isDone);
         todoService.save(todo);
 
         return "redirect:/";

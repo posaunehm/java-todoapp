@@ -29,15 +29,20 @@
 
   <div class="starter-template">
     <h1>Todo App</h1>
-    <p class="lead">ペアプロデモ用ToDoアプリ</p>
+    <p class="lead">ペアプロデモ用ToDoアプリです。</p>
   </div>
   <div th:each="todo: ${todos}">
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" th:checked="${todo.isDone}">
-        <span th:text="${todo.Title}" />
-      </label>
-    </div>
+    <form action="/edit" method="post">
+      <div class="checkbox">
+        <label>
+          <input type="hidden" name="id" th:value="${todo.id}">
+          <input type="checkbox"onclick="" name="isDone" th:checked="${todo.isDone}">
+          <span th:text="${todo.Title}" />
+        </label>
+        <button type="submit" class="btn btn-default btn-xs">更新</button>
+      </div>
+
+    </form>
   </div>
 
   <form action="/new" method="post">
