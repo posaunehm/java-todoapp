@@ -20,15 +20,4 @@ public class TodoService {
         return todoRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
     }
 
-    public Todo save(Todo todo) {
-        return todoRepository.save(todo);
-    }
-
-    public void delete(Long id) {
-        todoRepository.delete(id);
-    }
-
-    public Todo find(Long id) {
-        return todoRepository.findOne(id);
-    }
 }
